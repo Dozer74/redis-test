@@ -16,10 +16,7 @@ async def main():
     loop = asyncio.get_running_loop()
     loop.create_task(reader(channel))
 
-    try:
-        await asyncio.sleep(1000)
-    except KeyboardInterrupt:
-        pass
+    await asyncio.sleep(1000)
 
     redis.close()
     await redis.wait_closed()
