@@ -51,9 +51,6 @@ def _parse_payload(item: Tuple[str, str, OrderedDict]) -> PredictionMessage:
 
 async def main():
     redis = await aioredis.create_redis_pool('redis://localhost', encoding='utf-8')
-    # TODO: add the second consumer group that will emulate frontend worker.
-    #  It should start with the latest message available (from '$', not from '0')
-    #  and print it on the screen.
 
     with suppress(BusyGroupError):
         await redis.xgroup_create('predictions', 'db-worker', latest_id='0')
